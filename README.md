@@ -2,74 +2,86 @@
 
 This repository contains data analysis, statistical testing, and predictive modeling for AlphaCare Insurance Solutions (ACIS). The goal is to identify low-risk customers and help ACIS develop better pricing strategies.
 
+---
+
 ## Tasks
 
-- Task 1: Exploratory Data Analysis  
-- Task 2: Data Version Control (DVC)  
-- Task 3: Hypothesis Testing  
-- Task 4: Predictive Modeling  
+- **Task 1:** Git & GitHub Setup + Exploratory Data Analysis (EDA)
+- **Task 2:** Data Version Control (DVC)
+- **Task 3:** Hypothesis Testing
+- **Task 4:** Predictive Modeling
+
+---
 
 ## Tools Used
 
 - Python  
 - Git & GitHub  
 - DVC  
-- Pandas, Seaborn, Scikit-learn  
+- Pandas, NumPy, Seaborn, Matplotlib  
+- Scikit-learn  
 
 ---
 
-## Data Version Control (DVC)
+## Task 1: Git & GitHub + EDA
 
-This project uses DVC to manage and version control datasets, ensuring reproducibility and auditability of all analyses.
+### 1.1 Git and GitHub
 
-### Setup
+- A GitHub repository was created for the project with proper structure and documentation.
+- Branching strategy applied: `main`, `task-1`, `task-2`, etc.
+- Multiple commits with descriptive messages have been made for clarity and version tracking.
+- A GitHub Actions workflow is set up for CI/CD (optional enhancement).
 
-1. Install DVC
+### 1.2 Exploratory Data Analysis (EDA)
 
-```
-pip install dvc
-```
-2. Initialize DVC
+This phase focused on understanding the insurance portfolio data, identifying trends, outliers, and initial signals for risk profiling and pricing strategies.
 
-```
-dvc init
-```
-3. Configure local remote storage
+#### Data Summarization
 
-```
-mkdir -p dvc_storage
-dvc remote add -d localstorage ./dvc_storage
-```
-4. Track datasets
+- Descriptive statistics were generated for key variables:  
+  - `TotalPremium`, `TotalClaims`, `CustomValueEstimate`
+- Data types and structures were reviewed and cleaned as needed.
 
-```
-Add your dataset(s) to DVC:
-```
-5. dvc add data/MachineLearningRating_v3.csv
+#### Data Quality Checks
 
-```
-git add data/MachineLearningRating_v3.csv.dvc .gitignore dvc.yaml dvc.lock
-git commit -m "Track dataset with DVC"
-git push origin task-2
-```
-6. Push data to remote
+- Missing values were identified and visualized.
+- Columns with formatting issues (e.g., date, category types) were fixed.
 
-```
-dvc push
-```
-7. Reproducing the Environment
+#### Univariate Analysis
 
-To reproduce the project and retrieve data files:
+- Histograms for numeric variables and bar plots for categorical features.
+- Outlier detection via box plots on `TotalClaims`, `TotalPremium`, and `CustomValueEstimate`.
+
+#### Bivariate/Multivariate Analysis
+
+- Correlation matrix between key financial metrics.
+- Scatter plots: `TotalPremium` vs `TotalClaims`, grouped by `ZipCode`, `Gender`, and `VehicleType`.
+- Group-wise Loss Ratio (TotalClaims / TotalPremium) analyzed by:
+  - `Province`
+  - `Gender`
+  - `VehicleType`
+
+#### Trends Over Geography and Time
+
+- Monthly trends over 18 months to detect shifts in frequency and severity.
+- Changes in vehicle types and cover types over regions visualized.
+- Temporal analysis to detect seasonality or spikes in claim behavior.
+
+#### Highlight Plots
+
+Three creative visualizations were generated to demonstrate key insights:
+1. **Loss Ratio by Vehicle Type and Gender**
+2. **Monthly Claim Amount Trends**
+3. **Boxplot of TotalClaims across Provinces**
+
+---
+
+## Getting Started
+
+To clone and reproduce this project:
 
 ```
 git clone https://github.com/saron03/acis-insurance-analytics.git
 cd acis-insurance-analytics
-pip install dvc
-dvc pull
+pip install -r requirements.txt
 ```
-```
-vbnet
-
-Just replace your current README contents with this, and you’re good to go! 
-```
-
